@@ -1,3 +1,14 @@
+.main-bg {
+  height : 300px;
+  background-image : url('../public/bg.png');
+  background-size : cover;
+  background-position : center;
+}
+
+.list-img {
+  width: 80%
+}
+
 .App {
   text-align: center;
 }
