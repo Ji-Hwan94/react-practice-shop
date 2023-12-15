@@ -14,7 +14,7 @@ function App() {
 
   let navigate = useNavigate();
   let [shoes] = useState(data);
-
+  
   return (
     <div className="App">
       <Navbar bg="dark" data-bs-theme="dark">
