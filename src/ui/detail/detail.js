@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { Nav } from "react-bootstrap";
+import { Context1 } from "../../App.js"
 
 
 export default function Detail({shoes}){
+
+    let {재고} = useContext(Context1);
 
     let {id} = useParams();
     let detailShoes = shoes.find((param) => {
@@ -26,10 +29,18 @@ export default function Detail({shoes}){
         if(!numericPattern.test(numChk)){
             alert("그러지 말아 주세요");
         }
-    }, [numChk])
+    }, [numChk]);
+
+    let [fade, setFade] = useState("");
+    useEffect(() => {
+        setFade("end")
+        return () => {
+            setFade("");
+        }
+    }, [tab])
 
     return(
-        <>
+        <div className={`start ${fade}`}>
             {
                 detailShoes !== undefined ? 
                     <div className="container">
@@ -40,7 +51,6 @@ export default function Detail({shoes}){
                                 </div>
                                 : null
                         }
-                        
                         <div className="row">
                             <div className="col-md-6">
                                 <img src={"https://codingapple1.github.io/shop/shoes"+id+".jpg"} width="100%" />
@@ -71,16 +81,30 @@ export default function Detail({shoes}){
                         </Nav>
                         <TabContent tab={tab}></TabContent>
                     </div>
-                    
                 : 
-                <div className="container">
-                    없는 건디요
-                </div>
+                    <div className="container">
+                        없는 건디요
+                    </div>
             }
-        </>
+        </div>
     )
 }
 
 function TabContent({tab}){
-    return [<div>내용1</div>, <div>내용2</div>, <div>내용3</div>][tab]
+    let [fade, setFade] = useState("");
+    let {재고} = useContext(Context1);
+    useEffect(() => {
+        let a = setTimeout(() => {
+            setFade("end")
+        }, 100)
+        return () => {
+            clearTimeout(a);
+            setFade("");
+        }
+    }, [tab])
+    return  (
+                <div className={`start ${fade}` }>
+                    {[<div>{재고}</div>, <div>내용2</div>, <div>내용3</div>][tab]}
+                </div>
+            )
 }
