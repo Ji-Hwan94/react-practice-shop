@@ -22,7 +22,7 @@ export default function Home({shoes}){
                 </Row>
                 <button onClick={(e) => {   
                     setClickCnt(++clickCnt);
-                    if(clickCnt == 1){
+                    if(clickCnt === 1){
                         axios.get("https://codingapple1.github.io/shop/data2.json")
                         .then((result) => {
                             setShoesData(shoesData.concat([...result.data]));
@@ -30,7 +30,7 @@ export default function Home({shoes}){
                         .catch(() => {
                             console.log("실패함 ㅅㄱ")
                         })
-                    } else if (clickCnt == 2){
+                    } else if (clickCnt === 2){
                         axios.get("https://codingapple1.github.io/shop/data3.json")
                         .then((result) => {
                             setShoesData(shoesData.concat([...result.data]));

@@ -8,7 +8,7 @@ import Home from './ui/home/home'
 import Detail from './ui/detail/detail';
 import Event from './ui/event/event';
 import Cart from './ui/cart/cart'
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import data from './data';
 
 // context api
@@ -22,6 +22,9 @@ function App() {
   let navigate = useNavigate();
   let [shoes] = useState(data);
   let [재고] = useState([10, 11, 12]);
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify([]));
+  }, [])
   
   return (
     <div className="App">
